@@ -9,6 +9,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Login from './components/Login';
 import NewProduct from './components/NewProduct';
+import Signup from './components/Signup';
 
 
 const router = createBrowserRouter (
@@ -20,6 +21,7 @@ const router = createBrowserRouter (
       <Route path='contact' element={<Contact/>} />
       <Route path='login' element={<Login/>} />
       <Route path='newproduct' element={<NewProduct/>} />
+      <Route path='signup' element={<Signup/>} />
     </Route>
   )
 )
