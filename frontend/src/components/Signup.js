@@ -49,14 +49,27 @@ const Signup = () => {
       }
     })
   }
-
-  const handleSubmit = (e) => {
+  
+  console.log(process.env.REACT_APP_SERVER_DOMAIN)
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const {firstName, lastName, password, confirmPassword} = data
     if(firstName && lastName && password && confirmPassword) {
       if(password === confirmPassword) {
+
+        const fetchData = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/signup`, {
+          method : "POST",
+          headers : {
+            "content-type" : "application/json"
+          },
+          body : JSON.stringify(data)
+        })
+
+        const dataRes = await fetchData.json()
+        console.log(dataRes)
+
         alert("Successfully Registered")
-        naviate("/login")
+        // naviate("/login")
       }
       else {
         alert("password and confirm password are not equal")
