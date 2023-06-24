@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import LoginSignupImg from '../assets/login-animation.gif';
 import {BiShow, BiHide} from 'react-icons/bi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import {BsEmojiSmileUpsideDown} from 'react-icons/bs';
+import { ImageTobase64 } from '../utlity/ImageTobase64';
 
 const Signup = () => {
+  const naviate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConrimPswd, setShowConfirmPswd] = useState(false);
   const [data, setData] = useState({
@@ -12,6 +15,7 @@ const Signup = () => {
     email : "",
     password : "",
     confirmPassword : "",
+    image : ""
   })
   console.log(data);
   
@@ -33,17 +37,53 @@ const Signup = () => {
       }
     })
   }
+
+  const handleUploadProfileImage = async (e) => {
+    const data = await ImageTobase64(e.target.files[0])
+    console.log(data)
+    
+    setData((preve) => {
+      return {
+        ...preve,
+        image : data
+      }
+    })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const {firstName, lastName, password, confirmPassword} = data
+    if(firstName && lastName && password && confirmPassword) {
+      if(password === confirmPassword) {
+        alert("Successfully Registered")
+        naviate("/login")
+      }
+      else {
+        alert("password and confirm password are not equal")
+      }
+    }
+    else {
+      alert("Please enter all the required fields")
+    }
+  }
   
   return (
     <div className='p-3 md:p-4'>
       <div className='w-full max-w-sm bg-white m-auto flex flex-col p-4'>
         {/* <h1 className='text-center text-2xl font-bold'>Sign up</h1> */}
         <div className='w-20 overflow-hidden rounded-full drop-shadow shadow-md m-auto'>
-          <img src={LoginSignupImg} alt='img' className='w-full' />
+          <img src={data.image ? data.image : LoginSignupImg} alt='img' className='w-full' />
+
+          <label htmlFor='profileImage'>
+            <div className='absolute bottom-0 h-1/3 bg-opacity-50 bg-slate-500 w-full text-center'>
+              <p className='text-sm p-1 text-white'>Upload</p>
+            </div>
+            <input type={"file"} id='profileImage' accept='image/' className='hidden' onChange={handleUploadProfileImage} />
+          </label>
         </div>
 
         {/* signup form */}
-        <form className='w-full py-3 flex flex-col'>
+        <form className='w-full py-3 flex flex-col' onSubmit={handleSubmit}>
           <label htmlFor='firstName'>First Name</label>
           <input 
             type={"text"} 
@@ -103,7 +143,7 @@ const Signup = () => {
           <button type='submit' className='w-full max-w-[150px] m-auto bg-red-600 hover:bg-red-600 cursor-pointer text-white text-xl font-medium text-center py-1 rounded-full mt-4'>Sign up</button>
 
         </form>
-        <p className='text-left text-sm mt-2'>Already have account ? <Link to={"login"} className='text-red-500'>Login</Link></p>
+        <p className='text-left text-sm mt-2'>Already have account ? <Link to={"/login"} className='text-red-500 underline'>Login</Link></p>
       </div>
     </div>
   )
