@@ -4,6 +4,7 @@ import {BiShow, BiHide} from 'react-icons/bi';
 import { Link, useNavigate } from 'react-router-dom';
 import {BsEmojiSmileUpsideDown} from 'react-icons/bs';
 import { ImageTobase64 } from '../utlity/ImageTobase64';
+import { toast } from 'react-hot-toast';
 
 const Signup = () => {
   const naviate = useNavigate();
@@ -56,7 +57,7 @@ const Signup = () => {
     const {firstName, lastName, password, confirmPassword} = data
     if(firstName && lastName && password && confirmPassword) {
       if(password === confirmPassword) {
-
+ 
         const fetchData = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/signup`, {
           method : "POST",
           headers : {
@@ -68,8 +69,13 @@ const Signup = () => {
         const dataRes = await fetchData.json()
         console.log(dataRes)
 
-        alert("Successfully Registered")
+        toast(dataRes.message)
+        //alert(dataRes.message)
         // naviate("/login")
+
+        if(dataRes.alert) {
+          naviate("/login")
+        }
       }
       else {
         alert("password and confirm password are not equal")
