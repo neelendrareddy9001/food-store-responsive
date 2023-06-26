@@ -11,7 +11,7 @@ import Login from './components/Login';
 import NewProduct from './components/NewProduct';
 import Signup from './components/Signup';
 import { store } from './redux';
-import {Provider, provider} from 'react-redux';
+import { Provider} from 'react-redux';
 
 
 const router = createBrowserRouter (
