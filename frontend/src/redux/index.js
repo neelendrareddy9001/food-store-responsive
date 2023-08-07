@@ -1,16 +1,15 @@
-import {createStore} from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 import userSliceReducer from './userSlice';
-import { combineReducers } from '@reduxjs/toolkit';
 
-export const store = createStore({
+export const store = configureStore({
     reducer : {
         user : userSliceReducer
     },
 });
 
-const createRootReducer = (history) => {
-    return combineReducers({
-      router: connectRouter(history),
-      createUser: userSliceReducer,
-    });
-  };
+// const createRootReducer = (history) => {
+//     return combineReducers({
+//       router: connectRouter(history),
+//       createUser: userSliceReducer,
+//     });
+//   };

@@ -10,7 +10,7 @@ import Contact from './components/Contact';
 import Login from './components/Login';
 import NewProduct from './components/NewProduct';
 import Signup from './components/Signup';
-import { store } from './redux';
+import { store } from './redux/index';
 import { Provider} from 'react-redux';
 
 
