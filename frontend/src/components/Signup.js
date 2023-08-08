@@ -18,7 +18,7 @@ const Signup = () => {
     confirmPassword : "",
     image : ""
   })
-  console.log(data);
+  // console.log(data);
   
 
   const handleShowPassword = () => {
@@ -51,7 +51,7 @@ const Signup = () => {
     })
   }
   
-  console.log(process.env.REACT_APP_SERVER_DOMAIN)
+  // console.log(process.env.REACT_APP_SERVER_DOMAIN)
   const handleSubmit = async (e) => {
     e.preventDefault()
     const {firstName, lastName, password, confirmPassword} = data
