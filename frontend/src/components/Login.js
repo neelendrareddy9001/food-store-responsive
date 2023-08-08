@@ -59,6 +59,7 @@ const Login = () => {
           navigate("/")
         }, 1000);
       }
+      console.log(userData);
     }
     else {
       alert("Please enter all the required fields")

@@ -8,7 +8,7 @@ import {useSelector} from 'react-redux';
 const Header = () => {
     const [showMenu, setShowMenu] = useState(false);
 
-    const userData = useSelector((state) => state.user )
+    const userData = useSelector((state) => state.user)
     console.log(userData);
 
     const handleShowMenu = () => {
@@ -37,9 +37,9 @@ const Header = () => {
                     <div className='absolute -top-1 -right-1 text-white bg-red-500 h-4 w-4 text-center rounded-full m-0 p-0  text-sm'>0</div>
                 </div>
                 
-                <div className='text-2xl text-slate-600'>
-                    <div className='text-3xl cursor-pointer' onClick={handleShowMenu}>
-                        <HiOutlineUserCircle/>
+                <div className='text-2xl text-slate-600' onClick={handleShowMenu}>
+                    <div className='text-3xl cursor-pointer w-10 h-10 rounded-full overflow-hidden drop-shadow'>
+                        {userData.img ? <img src={userData.image} className='h-full w-full' /> : <HiOutlineUserCircle/> }
                     </div>
                     {showMenu && (
                         <div className='absolute right-2 bg-white py-2 px-2 shadow drop-shadow-md flex flex-col'>
