@@ -37,11 +37,11 @@ const Login = () => {
   }
 
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async(e)=>{
     e.preventDefault()
-    const {email, password} = data
-    if( email && password) {
-      const fetchData = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/login`, {
+    const {email,password} = data
+    if(email && password ){
+      const fetchData = await fetch(`${process.env.REACT_APP_SERVER_DOMIN}/login`,{
         method : "POST",
         headers : {
           "content-type" : "application/json"
@@ -51,18 +51,20 @@ const Login = () => {
 
       const dataRes = await fetchData.json()
       console.log(dataRes)
+      
       toast(dataRes.message)
-
-      if(dataRes.alert) {
+      
+      if(dataRes.alert){
         dispatch(loginRedux(dataRes))
         setTimeout(() => {
           navigate("/")
         }, 1000);
       }
-      console.log(userData);
+
+      console.log(userData)
     }
-    else {
-      alert("Please enter all the required fields")
+    else{
+        alert("Please Enter required fields")
     }
   }
   
