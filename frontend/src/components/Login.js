@@ -12,7 +12,8 @@ const Login = () => {
   const [data, setData] = useState({
     email : "",
     password : "",
-  })
+  });
+
   const navigate = useNavigate();
   
   const userData = useSelector(state => state)
