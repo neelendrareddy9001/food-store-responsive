@@ -87,16 +87,21 @@ const schemaProduct = mongoose.Schema({
     price : String,
     description : String,
 });
+const productModal = mongoose.model("product", schemaProduct);
 
 //save product in data
-app.post("/uploadProduct", (req,res) => {
+//api
+app.post("/uploadProduct", async (req,res) => {
     console.log(req.body)
 
+    const data = await productModal(req.body)
+    const dataSave = await data.save()
+    
     res.send({message : "Uloaded Successfuly"})
 })
 
 
-const productModal = mongoose.model("product", schemaProduct);
+
 
 app.listen(PORT, () => console.log("Server is running at port : " + PORT)
 )
