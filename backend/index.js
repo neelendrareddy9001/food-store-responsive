@@ -38,8 +38,8 @@ app.get("/", (req, res) => {
 
 app.post("/signup", (req, res) => {
     console.log(req.body)
-
     const {email} = req.body
+
     userModal.findOne({email : email},(err,result) => {
         console.log(result)
         console.log(err)
@@ -78,6 +78,25 @@ app.post("/login", (req, res) => {
         
     })
 })
+
+//product schema section
+const schemaProduct = mongoose.Schema({
+    name : String,
+    category : String,
+    image : String,
+    price : String,
+    description : String,
+});
+
+//save product in data
+app.post("/uploadProduct", (req,res) => {
+    console.log(req.body)
+
+    res.send({message : "Uloaded Successfuly"})
+})
+
+
+const productModal = mongoose.model("product", schemaProduct);
 
 app.listen(PORT, () => console.log("Server is running at port : " + PORT)
 )

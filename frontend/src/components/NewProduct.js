@@ -4,6 +4,7 @@ import { ImageTobase64 } from '../utlity/ImageTobase64';
 
 //import React-icons
 import {AiOutlineCloudUpload} from 'react-icons/ai';
+import { json } from 'react-router-dom';
 
 const NewProduct = () => {
 
@@ -38,9 +39,20 @@ const NewProduct = () => {
       })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
       e.preventDefault();
       console.log(data);
+
+      const fetchData = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/uploadProduct`, {
+        method : "POST",
+        headers : {
+          "content-type" : "application/json" 
+        },
+        body : JSON.stringify(data)
+      }) 
+      const fetchRes = await fetchData.json()
+
+      console.log(fetchRes)
   }
 
   return (
@@ -51,11 +63,13 @@ const NewProduct = () => {
 
         <label htmlFor='categor'>Category</label>
         <select className='bg-slate-200 p-1 my-1' id='category' name='categoty' onChange={handleChange}>
-          <option>Fruits</option>
-          <option>Vegetable</option>
-          <option>Icream</option>
-          <option>Dosa</option>
-          <option>Pizza</option>
+          <option value={"other"}>select category</option>
+          <option value={"fruits"}>Fruits</option>
+          <option value={"vegetable"}>Vegetable</option>
+          <option value={"iccream"}>Icream</option>
+          <option value={"dosa"}>Dosa</option>
+          <option value={"pizza"}>Pizza</option>
+          <option value={"rice"}>Rice</option>
         </select>
 
         <label htmlFor='image'>Image
