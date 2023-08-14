@@ -81,12 +81,14 @@ const NewProduct = () => {
           <option value={"rice"}>Rice</option>
           <option value={"cake"}>Cake</option>
           <option value={"burger"}>Burger</option>
+          <option value={"panner"}>Panner</option>
+          <option value={"sandwitch"}>Sandwitch</option>
         </select>
 
         <label htmlFor='image'>Image
         <div className='h-40 w-full bg-slate-200 rounded flex items-center cursor-pointer justify-center'>
             {
-              data.image ? <img src={data.image} className="h-full" /> : <span className='text-5xl'><AiOutlineCloudUpload/></span> 
+              data.image ? <img src={data.image} className="h-full" /> : <span className='text-5xl'><AiOutlineCloudUpload style={{color : "black"}}/></span> 
             }
             
           <input type={"file"} id='image' onChange={uploadImage} className='hidden' />
