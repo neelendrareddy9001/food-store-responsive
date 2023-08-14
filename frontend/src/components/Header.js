@@ -4,16 +4,26 @@ import { Link, useActionData } from 'react-router-dom';
 import {BsCartFill} from 'react-icons/bs';
 import {HiOutlineUserCircle} from 'react-icons/hi';
 import {useSelector} from 'react-redux';
+import { toast } from 'react-hot-toast';
+import { logoutRedux } from '../redux/userSlice';
 
 const Header = () => {
     const [showMenu, setShowMenu] = useState(false);
 
     const userData = useSelector((state) => state.user)
-    console.log(userData);
+    console.log(userData.email);
 
     const handleShowMenu = () => {
         setShowMenu (preve => !preve)
     }
+
+
+    const handleLogout = () => {
+        dispatchEvent(logoutRedux())
+        toast("LogOut Successfully")
+    }
+
+    console.log(process.env.REACT_APP_ADMIN_EMAIL)
   return (
     <header className='fixed shadow-md w-full h-16 px-2 md:px-4 z-50 bg-white'>
         {/* Desktop */}
@@ -43,8 +53,22 @@ const Header = () => {
                     </div>
                     {showMenu && (
                         <div className='absolute right-2 bg-white py-2 px-2 shadow drop-shadow-md flex flex-col'>
-                            <Link to={"newproduct"} className='whitespace-nowrap cursor-pointer'>New product</Link>
-                            <Link to={"login"} className='whitespace-nowrap cursor-pointer'>Login</Link>
+                        {
+                            userData.email === process.env.REACT_APP_ADMIN_EMAIL && <Link to={"newproduct"} className='whitespace-nowrap cursor-pointer'>New product</Link>
+                        }
+
+                        {userData.image ? (
+                            <p className="cursor-pointer text-white px-2 bg-red-500" onClick={handleLogout}>
+                    Logout ({userData.firstName}){" "}
+                  </p>
+                ) : (
+                  <Link
+                    to={"login"}
+                    className="whitespace-nowrap cursor-pointer px-2"
+                  >
+                    Login
+                  </Link>
+                )}
                         </div>
                     )}
                 </div>
